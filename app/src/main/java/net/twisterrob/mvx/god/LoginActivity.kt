@@ -1,5 +1,6 @@
 package net.twisterrob.mvx.god
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -7,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView.BufferType
 import android.widget.Toast
 import net.twisterrob.mvx.LoggerInner
+import net.twisterrob.mvx.MainActivity
 import net.twisterrob.mvx.R
 
 class LoginActivity : AppCompatActivity() {
@@ -20,9 +22,11 @@ class LoginActivity : AppCompatActivity() {
 		findViewById<Button>(R.id.login).setOnClickListener {
 			val email = findViewById<EditText>(R.id.email_edit).text.toString()
 			val password = findViewById<EditText>(R.id.password_edit).text.toString()
-			val userId = login.login(email, password)
+			val user = login.login(email, password)
 			login.lastLoggedInUser = email
-			Toast.makeText(this, "Logged in as $userId", Toast.LENGTH_LONG).show()
+			Toast.makeText(this, "Logged in as $user", Toast.LENGTH_LONG).show()
+			startActivity(Intent(this, MainActivity::class.java))
+			finish()
 		}
 	}
 }

@@ -11,6 +11,9 @@
 		android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
 		tools:ignore="GoogleAppIndexingWarning">
 
+
+		<activity android:name=".MainActivity" />
+
 		<activity
 			android:name=".god.LoginActivity"
 			android:windowSoftInputMode="adjustResize">
@@ -22,6 +25,15 @@
 
 		<activity
 			android:name=".trainline.LoginActivity"
+			android:windowSoftInputMode="adjustResize">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name=".mvc.LoginActivity"
 			android:windowSoftInputMode="adjustResize">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

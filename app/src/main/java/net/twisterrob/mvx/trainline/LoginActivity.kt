@@ -1,12 +1,17 @@
 package net.twisterrob.mvx.trainline
 
+import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.AnyThread
+import android.support.annotation.UiThread
+import android.support.annotation.WorkerThread
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.login_activity.view.*
 import net.twisterrob.mvx.LoggerInner
+import net.twisterrob.mvx.MainActivity
 import net.twisterrob.mvx.R
 import net.twisterrob.mvx.UserID
 import rx.Completable
@@ -15,6 +20,7 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.functions.Func1
 import rx.schedulers.Schedulers
 
+@UiThread
 class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +36,8 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
 
 	override fun loggedIn(user: String) {
 		Toast.makeText(this, "Logged in as $user", Toast.LENGTH_LONG).show()
+		startActivity(Intent(this, MainActivity::class.java))
+		finish()
 	}
 }
 
@@ -45,6 +53,7 @@ interface LoginActivityContract {
 	}
 }
 
+@UiThread
 class LoginActivityPresenter(
 	private val loginOrchestrator: LoginOrchestrator,
 	private val loginMapper: LoginModelMapper,
@@ -68,6 +77,7 @@ class LoginActivityPresenter(
 	}
 }
 
+@UiThread
 class LoginInteractions(
 	private val view: LoginActivityContract.View
 ) : LoginContract.Interactions {
@@ -101,6 +111,7 @@ class LoginPrefilledModel(
 	val password: String
 )
 
+@UiThread
 class LoginView(
 	private val view: View
 ) : LoginContract.View {
@@ -126,6 +137,7 @@ class LoginView(
 		set(value) = view.password_edit.setText(value)
 }
 
+@UiThread
 class LoginPresenter(
 	private val view: LoginContract.View,
 	private val interactions: LoginContract.Interactions,
@@ -156,6 +168,7 @@ class LoginPresenter(
 }
 
 class LoginModelMapper : Func1<String?, LoginPrefilledModel> {
+	@WorkerThread
 	override fun call(storedUserName: String?) =
 		LoginPrefilledModel(
 			storedUserName ?: "",
@@ -163,6 +176,7 @@ class LoginModelMapper : Func1<String?, LoginPrefilledModel> {
 		)
 }
 
+@AnyThread
 class LoginOrchestrator(
 	private val login: LoggerInner
 ) {
