@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".god.LoginActivity"
+	tools:ignore="UnusedAttribute,HardcodedText"
+	>
+
+	<android.support.constraint.Barrier
+		android:id="@+id/table_barrier"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:barrierDirection="end"
+		app:constraint_referenced_ids="email_label,password_label"
+		/>
+
+	<TextView
+		android:id="@+id/email_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="E-mail:"
+		android:textAppearance="@style/TextAppearance.AppCompat.Large"
+		android:visibility="invisible"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintBottom_toTopOf="@id/password_label"
+		app:layout_constraintVertical_chainStyle="packed"
+		app:layout_constraintTop_toTopOf="parent"
+		/>
+	<EditText
+		android:id="@+id/email_edit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:autofillHints="emailAddress"
+		android:hint="e-mail"
+		android:inputType="textEmailAddress"
+		app:layout_constraintTop_toTopOf="@id/email_label"
+		app:layout_constraintStart_toEndOf="@id/table_barrier"
+		/>
+
+	<TextView
+		android:id="@+id/password_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="4dp"
+		android:text="Password:"
+		android:textAppearance="@style/TextAppearance.AppCompat.Large"
+		android:visibility="invisible"
+		app:layout_constraintTop_toBottomOf="@id/email_label"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		/>
+	<EditText
+		android:id="@+id/password_edit"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:autofillHints="password"
+		android:hint="password"
+		android:inputType="textPassword"
+		app:layout_constraintTop_toTopOf="@id/password_label"
+		app:layout_constraintStart_toEndOf="@id/table_barrier"
+		/>
+
+	<Button
+		android:id="@+id/login"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingStart="48dp"
+		android:paddingEnd="48dp"
+		android:layout_marginBottom="16dp"
+		android:text="Log in"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		/>
+
+</android.support.constraint.ConstraintLayout>
